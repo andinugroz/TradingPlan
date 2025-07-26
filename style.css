@@ -1,381 +1,267 @@
-/* General Body & Container */
+/* style.css */
+
+/* Gaya Dasar (untuk desktop dan mobile secara umum) */
 body {
-    font-family: 'Space Mono', 'Roboto Mono', monospace; /* Futuristic monospaced font */
-    padding: 0;
+    font-family: 'Space Mono', monospace; /* Menggunakan font Space Mono */
+    background-color: #0d1117; /* Background gelap */
+    color: #e0e6ed; /* Warna teks terang */
     margin: 0;
-    background-color: #0d1117; /* Very dark, almost black background */
-    color: #e0e6ed; /* Light bluish-gray text */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    line-height: 1.7; /* Enhanced readability */
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    padding: 20px; /* Padding di sekitar body */
+    line-height: 1.6;
 }
 
 .container {
-    width: 90%;
-    max-width: 1300px; /* Slightly wider container */
-    margin: 40px auto;
-    background-color: #161b22; /* Darker charcoal */
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15); /* Subtle cyan glow */
-    padding: 40px;
-    box-sizing: border-box;
-    border: 1px solid #21262d; /* Subtle border */
-}
-
-h2, h3 {
-    color: #00e6e6; /* Bright cyan for headings */
-    text-align: center;
-    margin-bottom: 35px;
-    letter-spacing: 2px; /* Wider letter spacing for futuristic feel */
-    font-weight: 700;
-    text-transform: uppercase;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-h2::after, h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 2px;
-    background-color: #00e6e6; /* Cyan underline */
-    box-shadow: 0 0 10px #00e6e6; /* Glowing effect */
-}
-
-ul {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 25px;
-    background-color: #1f242b; /* Darker background for notes */
-    padding: 20px 25px;
-    border-radius: 6px;
+    max-width: 900px; /* Lebar maksimum container */
+    margin: 20px auto; /* Tengah di desktop, lebih baik di mobile */
+    background-color: #161b22; /* Warna latar belakang container */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15); /* Bayangan dengan aksen cyan */
     border: 1px solid #2d333b;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
 }
 
-ul li {
-    margin-bottom: 12px;
-    padding-left: 30px;
-    position: relative;
-    font-size: 0.98em;
-    color: #b0b8c4;
-}
-
-ul li strong {
-    color: #e0e6ed;
-}
-
-ul li::before {
-    content: '>>'; /* Futuristic arrow */
-    position: absolute;
-    left: 0;
-    color: #a341f0; /* Purple accent */
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-/* Input Groups */
-.input-group {
+h2, h3, h4 {
+    color: #00e6e6; /* Cyan terang untuk judul */
+    text-align: center;
     margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    margin-bottom: 15px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; /* Ubah menjadi kolom di mobile */
+    gap: 8px; /* Jarak antar label dan input */
 }
 
 .input-group label {
-    margin-right: 25px;
-    font-weight: 500;
-    color: #8b949e; /* Muted gray for labels */
-    min-width: 200px; /* Wider labels */
-    text-align: right;
-    font-size: 1.05em;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: bold;
+    color: #8b949e; /* Abu-abu untuk label */
 }
 
-input[type="number"],
-input[type="text"] {
-    width: 250px; /* Wider inputs */
-    padding: 14px 20px; /* More padding */
-    border: 1px solid #30363d; /* Dark border */
-    border-radius: 4px; /* Slightly sharper corners */
-    background-color: #0d1117; /* Matches body background for seamless look */
+.input-group input[type="number"],
+.input-group input[type="text"] {
+    width: calc(100% - 22px); /* Penyesuaian lebar input */
+    padding: 10px;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    background-color: #0d1117;
     color: #e0e6ed;
-    font-size: 1.0em;
+    font-size: 1em;
+    box-sizing: border-box; /* Pastikan padding termasuk lebar */
+}
+
+.input-group input:focus {
+    border-color: #00e6e6;
     outline: none;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.3);
 }
 
-input[type="number"]:focus,
-input[type="text"]:focus {
-    border-color: #00e6e6; /* Cyan glow on focus */
-    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.3), inset 0 1px 4px rgba(0,0,0,0.4);
+p {
+    margin-bottom: 10px;
 }
 
-/* Current Capital & PnL Info */
+/* Untuk Current Capital */
 #currentCapital {
-    text-align: center;
-    font-size: 1.3em;
-    font-weight: 600;
-    margin-top: 30px;
-    color: #36e007; /* green color */
-    text-shadow: 0 0 5px rgba(163, 65, 240, 0.5);
+    color: #28a745; /* Warna hijau */
+    font-weight: bold;
+    text-align: center; /* Pusatkan teks */
+    margin-top: 20px;
 }
 
 #profitInfo {
-    float: right;
-    border: 1px solid #2d333b;
-    background-color: #1f242b;
-    padding: 25px;
-    width: 320px; /* Wider */
-    box-sizing: border-box;
-    text-align: left;
-    font-size: 1.2em;
-    line-height: 1.5;
-    border-radius: 8px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    text-align: center;
     margin-bottom: 25px;
-}
-
-#profitInfo strong {
-    color: #e0e6ed;
-    font-size: 1.1em;
-    letter-spacing: 0.5px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #1f242b;
+    border: 1px solid #2d333b;
 }
 
 #profitResult {
+    /* Warna di sini sudah diatur secara dinamis oleh JavaScript
+       (hijau untuk profit, merah untuk loss), jadi Anda tidak perlu mengubahnya di CSS
+       jika Anda ingin perilaku itu tetap ada.
+    */
     font-weight: bold;
-    font-size: 1.6em;
-    margin-top: 12px;
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+    font-size: 1.2em;
+    margin-top: 5px;
 }
-/* Warna profit/loss akan diatur oleh JS inline-style */
 
-/* Buttons */
+/* Gaya Umum untuk semua tombol */
 button {
-    padding: 15px 35px; /* Larger buttons */
-    background-color: #a341f0; /* Purple accent */
+    background-color: #6a0dad; /* Ungu gelap */
     color: white;
+    padding: 12px 25px; /* Default padding yang lebih besar untuk tombol utama */
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 1em;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    margin: 20px 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 100%; /* Lebar penuh secara default */
+    margin-top: 15px; /* Jarak antar tombol */
+    box-sizing: border-box;
 }
 
 button:hover {
-    background-color: #b366ff; /* Lighter purple on hover */
-    transform: translateY(-4px); /* More pronounced lift */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 15px rgba(163, 65, 240, 0.6); /* Stronger glow */
+    background-color: #a341f0; /* Ungu lebih terang saat hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(163, 65, 240, 0.4);
 }
 
-button:active {
-    background-color: #8c2cdb;
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+/* Kustomisasi untuk tombol "Add Trade" dan "Rekap" di desktop */
+/* Saya mengasumsikan div ini memiliki struktur seperti di dashboard.html */
+/* style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;" */
+div[style*="display: flex"][style*="justify-content: space-between"] > button {
+    width: auto; /* Otomatis, tidak 100% */
+    padding: 10px 20px; /* Ukuran sedang */
+    font-size: 0.95em; /* Ukuran font sedang */
+    margin-top: 0; /* Hapus margin atas dari gaya button umum */
+    margin-right: 10px; /* Jarak antar tombol */
 }
 
-/* Table Styles */
+div[style*="display: flex"][style*="justify-content: space-between"] > button:last-child {
+    margin-right: 0; /* Hapus margin kanan untuk tombol terakhir */
+}
+
+
 table {
-    border-collapse: collapse;
     width: 100%;
-    margin-top: 40px;
-    background-color: #1f242b; /* Table background */
+    border-collapse: collapse;
+    margin-top: 30px;
+    background-color: #1a1e26;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    border: 1px solid #2d333b;
+    overflow: hidden; /* Pastikan sudut bulat terlihat */
 }
 
-th,
-td {
-    border: 1px solid #2d333b; /* Darker, subtle borders */
-    padding: 16px 20px; /* More padding */
+table th,
+table td {
+    padding: 12px 8px; /* Kurangi padding di tabel */
     text-align: center;
+    border-bottom: 1px solid #2d333b;
+    color: #e0e6ed;
+    font-size: 0.85em; /* Ukuran font lebih kecil */
 }
 
-th {
-    background-color: #161b22; /* Header background matches container */
-    color: #00e6e6; /* Cyan for headers */
-    font-weight: 600;
+table th {
+    background-color: #21262d;
+    color: #00e6e6; /* Cyan untuk header tabel */
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.95em;
-    letter-spacing: 1px;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    font-size: 0.9em;
 }
 
-tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.1); /* Very subtle alternating row */
+/* Warna hijau untuk angka USDT di tabel */
+table tbody td:nth-child(3), /* Position Size */
+table tbody td:nth-child(4), /* Risk (Loss) */
+table tbody td:nth-child(5)  /* Reward (Profit) */
+{
+    color: #28a745; /* Warna hijau */
+    font-weight: bold;
 }
 
-tr:hover {
-    background-color: rgba(0, 255, 255, 0.05); /* Light cyan hover effect */
-}
 
-td {
-    color: #b0b8c4;
-}
-
-/* Trade Coin Input in Table */
+/* Input di dalam tabel */
 .trade-coin-input {
-    width: 90%;
-    padding: 10px 15px;
-    background-color: #0d1117; /* Input background in table */
+    width: calc(100% - 10px); /* Sesuaikan lebar */
+    padding: 6px;
     border: 1px solid #30363d;
     border-radius: 4px;
+    background-color: #0d1117;
     color: #e0e6ed;
-    font-size: 0.95em;
+    font-size: 0.8em; /* Lebih kecil */
     box-sizing: border-box;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
 }
 
-.trade-coin-input:focus {
-    border-color: #a341f0; /* Purple glow */
-    box-shadow: 0 0 0 2px rgba(163, 65, 240, 0.3), inset 0 1px 3px rgba(0,0,0,0.3);
+.win-btn, .lose-btn {
+    padding: 6px 10px; /* Padding lebih kecil */
+    font-size: 0.8em; /* Ukuran font lebih kecil */
+    margin: 3px;
+    width: auto; /* Jangan 100% lebar */
 }
 
-/* Win/Lose Buttons in Table */
-td button {
-    padding: 8px 16px;
-    font-size: 0.9em;
-    margin: 5px;
-    border-radius: 5px;
-    font-weight: 600;
-    min-width: 70px;
-    display: inline-block;
-    box-shadow: none;
-    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.win-btn {
+    background-color: #28a745;
 }
 
-td button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-td button.win-btn {
-    background-color: #28a745; /* Green */
-}
-td button.win-btn:hover {
+.win-btn:hover {
     background-color: #218838;
 }
-td button.lose-btn {
-    background-color: #dc3545; /* Red */
+
+.lose-btn {
+    background-color: #dc3545;
 }
-td button.lose-btn:hover {
+
+.lose-btn:hover {
     background-color: #c82333;
 }
 
-/* Pagination Controls */
+
 #pagination-controls {
-    margin-top: 35px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    flex-wrap: wrap; /* Izinkan wrap di layar kecil */
 }
 
 #pagination-controls button {
-    margin: 0 12px;
-    padding: 14px 22px;
-    background-color: #1f242b; /* Darker background */
-    color: #e0e6ed;
-    border: 1px solid #2d333b;
-    border-radius: 6px;
-    font-size: 1.05em;
-    transition: all 0.3s ease;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-#pagination-controls button:hover:not(:disabled) {
-    background-color: #2d333b;
-    border-color: #a341f0; /* Purple glow */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4), 0 0 8px rgba(163, 65, 240, 0.4);
+    width: auto; /* Override 100% width from general button style */
+    padding: 8px 15px;
+    margin: 5px; /* Sesuaikan margin untuk tampilan lebih baik saat wrap */
+    background-color: #2d333b; /* Warna tombol pagination default */
 }
 
 #pagination-controls button.active {
-    background-color: #00e6e6; /* Cyan accent for active page */
-    color: #0d1117; /* Dark text on bright button */
-    border-color: #00e6e6;
-    box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.3), 0 0 15px rgba(0, 255, 255, 0.6);
+    background-color: #00e6e6; /* Cyan untuk tombol aktif */
+    color: #0d1117;
+    font-weight: bold;
 }
 
-#pagination-controls button:disabled {
-    cursor: not-allowed;
-    opacity: 0.3;
-    background-color: #161b22;
-    border-color: #161b22;
-    box-shadow: none;
+#pagination-controls button:hover:not(.active) {
+    background-color: #3f4752;
 }
 
-/* TradingView Chart Specifics */
-#tvChart {
-    width: 100%;
-    height: 550px; /* Slightly taller chart */
-    margin-top: 45px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.2); /* Stronger glow */
-    border: 1px solid #2d333b;
-}
 
-/* Toolbar Styles */
+/* Toolbar untuk TradingView (tersembunyi secara default) */
 .toolbar {
-    background-color: #1f242b;
-    border-radius: 8px;
-    padding: 25px;
-    margin-top: 35px;
-    text-align: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    background-color: #1a1e26;
     border: 1px solid #2d333b;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+.toolbar.hidden {
+    display: none;
 }
 
 .toolbar h4 {
     color: #e0e6ed;
-    margin-bottom: 25px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
 .toolbar button {
-    margin: 10px 15px;
-    padding: 14px 28px;
-    background-color: #00e6e6; /* Cyan for toolbar buttons */
-    color: #0d1117; /* Dark text on bright button */
-    border-radius: 6px;
-    font-size: 1.05em;
+    width: calc(100% - 20px); /* Hampir 100% dengan padding */
+    margin: 10px auto; /* Tengah dan jarak vertikal */
+    background-color: #00e6e6; /* Warna cyan */
+    color: #0d1117; /* Teks gelap */
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.3);
-}
-.toolbar button:hover {
-    background-color: #00ffff;
-    box-shadow: 0 6px 15px rgba(0, 255, 255, 0.4);
-}
-.toolbar button:active {
-    background-color: #00c0c0;
 }
 
-.hidden {
-    display: none;
+.toolbar button:hover {
+    background-color: #00cccc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+#tvChart {
+    margin-top: 30px;
+    border: 1px solid #2d333b;
+    border-radius: 8px;
+    overflow: hidden; /* Penting untuk grafik */
 }
 
 /* Modal Styles */
@@ -391,7 +277,7 @@ td button.lose-btn:hover {
     background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
     justify-content: center;
     align-items: center;
-    padding-top: 50px; /* Space from top */
+    padding-top: 20px; /* Kurangi padding untuk mobile */
 }
 
 .modal.hidden {
@@ -400,15 +286,16 @@ td button.lose-btn:hover {
 
 .modal-content {
     background-color: #161b22; /* Darker charcoal */
-    margin: auto;
-    padding: 30px;
+    margin: 10% auto; /* Kurangi margin vertikal */
+    padding: 20px; /* Kurangi padding */
     border: 1px solid #2d333b;
     border-radius: 10px;
-    width: 80%; /* Could be more responsive */
-    max-width: 700px; /* Max width for larger screens */
+    width: 90%; /* Lebih lebar di mobile */
+    max-width: 700px;
     box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); /* Subtle cyan glow */
     position: relative;
     color: #e0e6ed;
+    box-sizing: border-box; /* Penting untuk padding */
 }
 
 .close-button {
@@ -431,22 +318,25 @@ td button.lose-btn:hover {
 .modal-content h3 {
     color: #00e6e6; /* Cyan for modal heading */
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Kurangi margin */
     letter-spacing: 1.5px;
     text-transform: uppercase;
+    font-size: 1.2em; /* Lebih kecil di mobile */
 }
 
 .recap-filters {
     display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    align-items: center;
+    flex-direction: column; /* Ubah menjadi kolom */
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: stretch; /* Regangkan item */
     justify-content: center;
 }
 
 .recap-filters label {
     color: #8b949e;
-    font-size: 0.95em;
+    font-size: 0.9em;
+    text-align: center; /* Pusatkan label */
 }
 
 .recap-filters input[type="date"] {
@@ -455,8 +345,10 @@ td button.lose-btn:hover {
     border-radius: 4px;
     background-color: #0d1117;
     color: #e0e6ed;
-    font-size: 0.95em;
+    font-size: 0.9em;
     outline: none;
+    width: 100%; /* Lebar penuh */
+    box-sizing: border-box;
 }
 
 .recap-filters input[type="date"]:focus {
@@ -465,10 +357,12 @@ td button.lose-btn:hover {
 }
 
 .recap-filters button {
-    padding: 10px 20px;
-    font-size: 0.95em;
-    margin: 0; /* Override default button margin */
+    padding: 10px 15px; /* Kurangi padding */
+    font-size: 0.9em;
+    margin-top: 5px; /* Jarak antar tombol filter */
     background-color: #a341f0; /* Purple accent */
+    width: 100%; /* Lebar penuh */
+    box-sizing: border-box;
 }
 
 .recap-filters button:hover {
@@ -479,24 +373,197 @@ td button.lose-btn:hover {
 
 #recapResults h4 {
     color: #00e6e6;
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin-top: 20px; /* Kurangi margin */
+    margin-bottom: 10px;
     border-bottom: 1px solid #2d333b;
     padding-bottom: 5px;
-    font-size: 1.1em;
+    font-size: 1em; /* Lebih kecil */
 }
 
 #recapResults div {
     background-color: #1f242b;
-    padding: 15px 20px;
+    padding: 10px 15px; /* Kurangi padding */
     border-radius: 6px;
     border: 1px solid #2d333b;
-    margin-bottom: 15px;
-    font-size: 0.95em;
-    line-height: 1.6;
+    margin-bottom: 10px;
+    font-size: 0.9em; /* Lebih kecil */
+    line-height: 1.5;
 }
 
 #recapResults div span {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+}
+
+
+/* Media Queries untuk Layar Kecil (Mobile) */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px; /* Margin lebih kecil di mobile */
+        padding: 15px; /* Padding lebih kecil */
+        border-radius: 8px;
+    }
+
+    h2, h3, h4 {
+        font-size: 1.5em; /* Ukuran judul lebih kecil */
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        flex-direction: column; /* Tetap kolom */
+        gap: 5px;
+    }
+
+    .input-group label,
+    .input-group input {
+        font-size: 0.9em;
+    }
+
+    /* Tombol utama (Generate Trading Plan) */
+    button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    /* Kustomisasi untuk tombol "Add Trade" dan "Rekap" di mobile */
+    /* Mengasumsikan div ini memiliki struktur seperti di dashboard.html */
+    /* style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;" */
+    div[style*="display: flex"][style*="justify-content: space-between"] {
+        flex-direction: row; /* Tetap baris */
+        justify-content: space-around; /* Agar tombol memiliki jarak yang sama */
+        margin-top: 20px; /* Sesuaikan margin atas */
+    }
+
+    div[style*="display: flex"][style*="justify-content: space-between"] > button {
+        width: auto; /* Otomatis */
+        flex-grow: 1; /* Biarkan mereka tumbuh untuk mengisi ruang, tapi tidak terlalu besar */
+        max-width: 48%; /* Agar tidak 100% dan tetap bisa berdampingan */
+        padding: 10px 15px; /* Ukuran sedang */
+        font-size: 0.9em; /* Ukuran font sedang */
+        margin: 5px; /* Margin sedang antar tombol */
+    }
+
+
+    /* Tabel responsif */
+    table {
+        display: block; /* Membuat tabel sebagai blok */
+        width: 100%;
+        overflow-x: auto; /* Memungkinkan scroll horizontal jika konten terlalu lebar */
+        white-space: nowrap; /* Mencegah teks melilit di sel */
+    }
+
+    table thead, table tbody, table tr {
+        display: block; /* Memaksa setiap baris dan header menjadi blok */
+    }
+
+    table th, table td {
+        display: inline-block; /* Membuat sel sebaris */
+        width: auto; /* Lebar otomatis */
+        min-width: 80px; /* Lebar minimum untuk setiap kolom */
+        box-sizing: border-box; /* Termasuk padding dalam lebar */
+        border-bottom: none; /* Hapus border antar baris yang sekarang sebaris */
+        vertical-align: top;
+        text-align: left; /* Teks rata kiri */
+    }
+
+    table thead {
+        border-bottom: 1px solid #2d333b; /* Batas bawah header */
+    }
+
+    table th:first-child,
+    table td:first-child {
+        min-width: 40px; /* Kolom No lebih kecil */
+    }
+
+    table th:nth-child(2),
+    table td:nth-child(2) {
+        min-width: 100px; /* Kolom Trade/Koin */
+    }
+
+    table td:last-child {
+        min-width: 120px; /* Kolom Result lebih lebar untuk tombol */
+    }
+
+    /* Atur tampilan tombol win/lose di dalam sel Result */
+    table td .win-btn,
+    table td .lose-btn {
+        display: inline-block; /* Agar tombol berdampingan */
+        margin: 2px;
+        padding: 5px 8px;
+        font-size: 0.75em;
+    }
+
+    /* Sesuaikan input di dalam tabel agar tidak terlalu lebar */
+    .trade-coin-input {
+        width: calc(100% - 12px); /* Lebih sempit di mobile */
+    }
+
+    .toolbar button {
+        padding: 8px 15px;
+        font-size: 0.85em;
+    }
+
+    .modal-content {
+        padding: 15px; /* Padding modal lebih kecil */
+        margin: 5% auto; /* Margin modal lebih kecil */
+    }
+
+    .recap-filters {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .recap-filters button {
+        margin-top: 0; /* Hapus margin-top tambahan */
+    }
+
+    #recapResults div {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+}
+
+/* Optional: Untuk tampilan yang sangat kecil (misal: iPhone SE) */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    h2, h3 {
+        font-size: 1.3em;
+    }
+
+    /* Kustomisasi untuk tombol "Add Trade" dan "Rekap" di mobile kecil */
+    div[style*="display: flex"][style*="justify-content: space-between"] > button {
+        padding: 8px 12px; /* Lebih kecil lagi */
+        font-size: 0.8em;
+    }
+
+    table th, table td {
+        min-width: 60px; /* Bahkan lebih kecil untuk kolom */
+        font-size: 0.8em;
+        padding: 8px 5px;
+    }
+
+    table td:last-child {
+        min-width: 100px;
+    }
+
+    .win-btn, .lose-btn {
+        padding: 4px 6px;
+        font-size: 0.7em;
+    }
+
+    .toolbar button {
+        font-size: 0.8em;
+    }
+
+    .modal-content {
+        padding: 10px;
+    }
+
+    .recap-filters button {
+        font-size: 0.8em;
+    }
 }
