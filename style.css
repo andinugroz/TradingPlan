@@ -1,0 +1,502 @@
+/* General Body & Container */
+body {
+    font-family: 'Space Mono', 'Roboto Mono', monospace; /* Futuristic monospaced font */
+    padding: 0;
+    margin: 0;
+    background-color: #0d1117; /* Very dark, almost black background */
+    color: #e0e6ed; /* Light bluish-gray text */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    line-height: 1.7; /* Enhanced readability */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.container {
+    width: 90%;
+    max-width: 1300px; /* Slightly wider container */
+    margin: 40px auto;
+    background-color: #161b22; /* Darker charcoal */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15); /* Subtle cyan glow */
+    padding: 40px;
+    box-sizing: border-box;
+    border: 1px solid #21262d; /* Subtle border */
+}
+
+h2, h3 {
+    color: #00e6e6; /* Bright cyan for headings */
+    text-align: center;
+    margin-bottom: 35px;
+    letter-spacing: 2px; /* Wider letter spacing for futuristic feel */
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h2::after, h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background-color: #00e6e6; /* Cyan underline */
+    box-shadow: 0 0 10px #00e6e6; /* Glowing effect */
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 25px;
+    background-color: #1f242b; /* Darker background for notes */
+    padding: 20px 25px;
+    border-radius: 6px;
+    border: 1px solid #2d333b;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+}
+
+ul li {
+    margin-bottom: 12px;
+    padding-left: 30px;
+    position: relative;
+    font-size: 0.98em;
+    color: #b0b8c4;
+}
+
+ul li strong {
+    color: #e0e6ed;
+}
+
+ul li::before {
+    content: '>>'; /* Futuristic arrow */
+    position: absolute;
+    left: 0;
+    color: #a341f0; /* Purple accent */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-group label {
+    margin-right: 25px;
+    font-weight: 500;
+    color: #8b949e; /* Muted gray for labels */
+    min-width: 200px; /* Wider labels */
+    text-align: right;
+    font-size: 1.05em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 250px; /* Wider inputs */
+    padding: 14px 20px; /* More padding */
+    border: 1px solid #30363d; /* Dark border */
+    border-radius: 4px; /* Slightly sharper corners */
+    background-color: #0d1117; /* Matches body background for seamless look */
+    color: #e0e6ed;
+    font-size: 1.0em;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+    border-color: #00e6e6; /* Cyan glow on focus */
+    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.3), inset 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Current Capital & PnL Info */
+#currentCapital {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 30px;
+    color: #36e007; /* green color */
+    text-shadow: 0 0 5px rgba(163, 65, 240, 0.5);
+}
+
+#profitInfo {
+    float: right;
+    border: 1px solid #2d333b;
+    background-color: #1f242b;
+    padding: 25px;
+    width: 320px; /* Wider */
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.5;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+#profitInfo strong {
+    color: #e0e6ed;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+}
+
+#profitResult {
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-top: 12px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+}
+/* Warna profit/loss akan diatur oleh JS inline-style */
+
+/* Buttons */
+button {
+    padding: 15px 35px; /* Larger buttons */
+    background-color: #a341f0; /* Purple accent */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 20px 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button:hover {
+    background-color: #b366ff; /* Lighter purple on hover */
+    transform: translateY(-4px); /* More pronounced lift */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 15px rgba(163, 65, 240, 0.6); /* Stronger glow */
+}
+
+button:active {
+    background-color: #8c2cdb;
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Table Styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 40px;
+    background-color: #1f242b; /* Table background */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid #2d333b;
+}
+
+th,
+td {
+    border: 1px solid #2d333b; /* Darker, subtle borders */
+    padding: 16px 20px; /* More padding */
+    text-align: center;
+}
+
+th {
+    background-color: #161b22; /* Header background matches container */
+    color: #00e6e6; /* Cyan for headers */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.95em;
+    letter-spacing: 1px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1); /* Very subtle alternating row */
+}
+
+tr:hover {
+    background-color: rgba(0, 255, 255, 0.05); /* Light cyan hover effect */
+}
+
+td {
+    color: #b0b8c4;
+}
+
+/* Trade Coin Input in Table */
+.trade-coin-input {
+    width: 90%;
+    padding: 10px 15px;
+    background-color: #0d1117; /* Input background in table */
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    color: #e0e6ed;
+    font-size: 0.95em;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.trade-coin-input:focus {
+    border-color: #a341f0; /* Purple glow */
+    box-shadow: 0 0 0 2px rgba(163, 65, 240, 0.3), inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Win/Lose Buttons in Table */
+td button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+    margin: 5px;
+    border-radius: 5px;
+    font-weight: 600;
+    min-width: 70px;
+    display: inline-block;
+    box-shadow: none;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+td button.win-btn {
+    background-color: #28a745; /* Green */
+}
+td button.win-btn:hover {
+    background-color: #218838;
+}
+td button.lose-btn {
+    background-color: #dc3545; /* Red */
+}
+td button.lose-btn:hover {
+    background-color: #c82333;
+}
+
+/* Pagination Controls */
+#pagination-controls {
+    margin-top: 35px;
+    text-align: center;
+}
+
+#pagination-controls button {
+    margin: 0 12px;
+    padding: 14px 22px;
+    background-color: #1f242b; /* Darker background */
+    color: #e0e6ed;
+    border: 1px solid #2d333b;
+    border-radius: 6px;
+    font-size: 1.05em;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+#pagination-controls button:hover:not(:disabled) {
+    background-color: #2d333b;
+    border-color: #a341f0; /* Purple glow */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4), 0 0 8px rgba(163, 65, 240, 0.4);
+}
+
+#pagination-controls button.active {
+    background-color: #00e6e6; /* Cyan accent for active page */
+    color: #0d1117; /* Dark text on bright button */
+    border-color: #00e6e6;
+    box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.3), 0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+#pagination-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+    background-color: #161b22;
+    border-color: #161b22;
+    box-shadow: none;
+}
+
+/* TradingView Chart Specifics */
+#tvChart {
+    width: 100%;
+    height: 550px; /* Slightly taller chart */
+    margin-top: 45px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.2); /* Stronger glow */
+    border: 1px solid #2d333b;
+}
+
+/* Toolbar Styles */
+.toolbar {
+    background-color: #1f242b;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 35px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid #2d333b;
+}
+
+.toolbar h4 {
+    color: #e0e6ed;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.toolbar button {
+    margin: 10px 15px;
+    padding: 14px 28px;
+    background-color: #00e6e6; /* Cyan for toolbar buttons */
+    color: #0d1117; /* Dark text on bright button */
+    border-radius: 6px;
+    font-size: 1.05em;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.3);
+}
+.toolbar button:hover {
+    background-color: #00ffff;
+    box-shadow: 0 6px 15px rgba(0, 255, 255, 0.4);
+}
+.toolbar button:active {
+    background-color: #00c0c0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px; /* Space from top */
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: #161b22; /* Darker charcoal */
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #2d333b;
+    border-radius: 10px;
+    width: 80%; /* Could be more responsive */
+    max-width: 700px; /* Max width for larger screens */
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); /* Subtle cyan glow */
+    position: relative;
+    color: #e0e6ed;
+}
+
+.close-button {
+    color: #e0e6ed;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #00e6e6; /* Cyan on hover */
+    text-decoration: none;
+}
+
+.modal-content h3 {
+    color: #00e6e6; /* Cyan for modal heading */
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.recap-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.recap-filters label {
+    color: #8b949e;
+    font-size: 0.95em;
+}
+
+.recap-filters input[type="date"] {
+    padding: 10px 15px;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    background-color: #0d1117;
+    color: #e0e6ed;
+    font-size: 0.95em;
+    outline: none;
+}
+
+.recap-filters input[type="date"]:focus {
+    border-color: #00e6e6;
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.3);
+}
+
+.recap-filters button {
+    padding: 10px 20px;
+    font-size: 0.95em;
+    margin: 0; /* Override default button margin */
+    background-color: #a341f0; /* Purple accent */
+}
+
+.recap-filters button:hover {
+    background-color: #b366ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(163, 65, 240, 0.4);
+}
+
+#recapResults h4 {
+    color: #00e6e6;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #2d333b;
+    padding-bottom: 5px;
+    font-size: 1.1em;
+}
+
+#recapResults div {
+    background-color: #1f242b;
+    padding: 15px 20px;
+    border-radius: 6px;
+    border: 1px solid #2d333b;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+#recapResults div span {
+    display: block;
+    margin-bottom: 5px;
+}
