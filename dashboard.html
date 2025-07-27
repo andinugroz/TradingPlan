@@ -1,109 +1,144 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Trading Plan</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Journal Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker/dist/css/datepicker.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
-    <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div id="mainApp">
-            <h2>Crypto Futures Trading Plan</h2>
-            <div class="input-group">
-                <label for="initialCapital">Initial Capital (USDT):</label>
-                <input type="number" id="initialCapital" value="100" />
-            </div>
-            <div class="input-group">
-                <label for="positionSize">Position Size (% of capital):</label>
-                <input type="number" id="positionSize" value="5" />
-            </div>
-            <p id="currentCapital">Current Capital: 100.00 USDT</p>
-            <div id="profitInfo">
-                <strong>Keuntungan / Kerugian (PnL):</strong>
-                <p id="profitResult">+0.00 USDT</p>
-            </div>
-            <button onclick="generateTradingPlan()">Generate Trading Plan</button>
+        <h2>Trading Plan Generator</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Trade/Koin</th>
-                        <th>Position Size</th>
-                        <th>Risk (Loss)</th>
-                        <th>Reward (Profit)</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
+        <div class="input-group">
+            <label for="initialCapital">Initial Capital (USDT):</label>
+            <input type="number" id="initialCapital" placeholder="e.g., 100" value="100">
+        </div>
 
-                <tbody id="planBody"></tbody>
-            </table>
+        <div class="input-group">
+            <label for="positionSize">Position Size (%) from Capital:</label>
+            <input type="number" id="positionSize" placeholder="e.g., 5" value="5">
+        </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
-                <button onclick="addRow()">Add Trade</button>
-                <button onclick="showRecapModal()">Rekap</button>
-            </div>
-            <div id="pagination-controls"></div>
+        <button onclick="generateTradingPlan()">Generate Trading Plan</button>
 
-            <div style="margin-top: 40px; border-top: 1px solid #2d333b; padding-top: 20px;">
-                <h3>📌 Catatan:</h3>
-                <ul>
-                    <li><strong>leverage Future per trade:</strong> adalah sebanyak 25X</li>
-                    <li><strong>Risk Lose per trade:</strong> adalah sebesar 2% dari posisi (bukan modal awal).</li>
-                    <li><strong>Reward per trade:</strong> 4% dari posisi (bukan modal awal).</li>
-                    <li>Ukuran position size ditentukan dari % modal dan dibagi jumlah trade.</li>
-                    <li>Gunakan <strong>Stop Loss (SL)</strong> dan <strong>Take Profit (TP)</strong> dengan disiplin.
-                    </li>
-                </ul>
-            </div>
+        <div id="profitInfo">
+            <p id="currentCapital">Current Capital: 0.00 USDT</p>
+            <p>Total PnL: <span id="profitResult">+0.00 USDT</span></p>
+        </div>
 
-            <h2>📊 Trading Plan + Grafik Crypto</h2>
-            <div class="input-group">
-                <label>ID Koin (contoh: BTCUSDT): </label>
-                <input type="text" id="coinId" value="BTCUSDT" />
-                <button onclick="loadChart()" style="margin-left: 10px;">Cari</button>
-            </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Trade/Koin</th>
+                    <th>Position Size</th>
+                    <th>Risk (Loss)</th>
+                    <th>Reward (Profit)</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody id="planBody">
+            </tbody>
+        </table>
+        <button onclick="addRow()">Add Trade</button>
+        <div id="pagination-controls"></div>
 
-            <div class="toolbar hidden" id="toolbar">
-                <h4>✏️ Tools</h4>
-                <button onclick="alert('Simulasi Garis Tren')">📏 Trendline</button>
-                <button onclick="alert('Simulasi Rectangle')">▭ Rectangle</button>
-                <button onclick="alert('Simulasi Horizontal Line')">— H Line</button>
-            </div>
+        <div class="action-buttons-group">
+            <button onclick="saveTradingData()">Save Trading</button>
+            <button onclick="showCalendarRecap()">Lihat Kalender</button>
+        </div>
 
-            <div id="tvChart"></div>
+        <div class="notes-section">
+            <h3>📌 Catatan:</h3>
+            <ul>
+                <li><strong>leverage Future per trade:</strong> adalah sebanyak 25X</li>
+                <li><strong>Risk Lose per trade:</strong> adalah sebesar 2% dari posisi (bukan modal awal).</li>
+                <li><strong>Reward per trade:</strong> 4% dari posisi (bukan modal awal).</li>
+                <li>Ukuran position size ditentukan dari % modal dan dibagi jumlah trade.</li>
+                <li>Gunakan <strong>Stop Loss (SL)</strong> dan <strong>Take Profit (TP)</strong> dengan disiplin.</li>
+            </ul>
+        </div>
+
+        <div class="input-group">
+            <label for="coinId">Load Chart (e.g., BTCUSDT):</label>
+            <input type="text" id="coinId" placeholder="BTCUSDT">
+            <button onclick="loadChart()">Load Chart</button>
+        </div>
+
+        <div id="tvChart"></div>
+
+        <!-- New class for the fullscreen button container -->
+        <div class="chart-controls">
+            <button id="fullscreenChartBtn" onclick="toggleFullScreenChart()">Layar Penuh Grafik</button>
+        </div>
+
+        <div class="toolbar hidden" id="toolbar">
+            <h4>✏️ Tools</h4>
+            <button onclick="drawLine()">📏 Trendline</button>
+            <button onclick="drawText()">▭ Rectangle</button>
+            <button onclick="clearDrawing()">— H Line</button>
         </div>
     </div>
 
     <div id="recapModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button" onclick="hideRecapModal()">&times;</span>
-            <h3>Rekapitulasi Trading</h3>
+            <h3 id="recapModalTitle">Ringkasan Trading</h3>
+
             <div class="recap-filters">
-                <label for="recapDate">Filter Tanggal (Opsional):</label>
-                <input type="date" id="recapDate">
-                <button onclick="generateRecap()">Filter Rekap</button>
-                <button onclick="exportRecapCsv()">Export CSV</button>
+                <button onclick="showHistoryTrading()">History Trading</button>
+                <button onclick="exportTradingHistoryCsv()">Export CSV History</button>
             </div>
-            <div id="recapResults">
-                <h4>Rekap Harian:</h4>
-                <div id="dailyRecap"></div>
-                <h4>Rekap Bulanan:</h4>
-                <div id="monthlyRecap"></div>
-                <h4>Rekap Tahunan:</h4>
-                <div id="yearlyRecap"></div>
+
+            <div id="recapResults"></div>
+        </div>
+    </div>
+
+    <div id="calendarOnlyModal" class="modal hidden">
+        <div class="modal-content-calendar">
+            <span class="close-button" onclick="hideCalendarOnlyModal()">&times;</span>
+            <h3>Pilih Tanggal Riwayat Trading</h3>
+            <div id="datepickerContainerOnly"></div>
+            <input type="hidden" id="datepickerInputOnly">
+            <div class="calendar-action-buttons">
+                <button onclick="applyDateFilterAndShowRecap()">Tampilkan Rekap</button>
+                <button onclick="clearDateFilterAndShowRecap()">Hapus Filter & Kembali</button>
             </div>
         </div>
     </div>
 
-    <script src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Script tambahan fullscreen -->
+    <script>
+        function toggleFullScreenChart() {
+            const chart = document.getElementById('tvChart');
+            if (!document.fullscreenElement) {
+                if (chart.requestFullscreen) {
+                    chart.requestFullscreen();
+                } else if (chart.webkitRequestFullscreen) {
+                    chart.webkitRequestFullscreen();
+                } else if (chart.msRequestFullscreen) {
+                    chart.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

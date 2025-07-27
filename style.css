@@ -1,23 +1,71 @@
 /* style.css */
 
-/* Gaya Dasar (untuk desktop dan mobile secara umum) */
+/* --- Base Styles --- */
+html, body {
+    height: 100%; /* Memastikan html dan body mengambil tinggi penuh viewport secara default */
+    margin: 0; /* Pastikan tidak ada margin default pada html/body */
+    padding: 0; /* Pastikan tidak ada padding default pada html/body */
+}
+
 body {
     font-family: 'Space Mono', monospace; /* Menggunakan font Space Mono */
     background-color: #0d1117; /* Background gelap */
     color: #e0e6ed; /* Warna teks terang */
-    margin: 0;
     padding: 20px; /* Padding di sekitar body */
     line-height: 1.6;
+    box-sizing: border-box; /* Pastikan padding termasuk lebar dan tinggi elemen */
+    display: flex; /* Menggunakan flexbox untuk mengelola tinggi konten */
+    flex-direction: column; /* Menumpuk elemen anak secara vertikal */
+    min-height: 100vh; /* Memastikan body setidaknya setinggi viewport */
 }
+
+/* Gaya untuk elemen html dan body saat dalam mode layar penuh */
+/* Ini penting untuk memastikan elemen root mengambil dimensi viewport penuh */
+html:-webkit-full-screen,
+body:-webkit-full-screen { /* Untuk Chrome, Safari, dan Opera */
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important; /* Penting untuk mencegah scrollbar */
+}
+
+html:-moz-full-screen,
+body:-moz-full-screen { /* Untuk Firefox */
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+html:-ms-fullscreen,
+body:-ms-fullscreen { /* Untuk Internet Explorer */
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+html:fullscreen,
+body:fullscreen { /* Sintaks standar */
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 9999 !important; /* Pastikan di atas semua elemen lain */
+    overflow: hidden !important; /* Pastikan tidak ada scrollbar pada body saat fullscreen */
+}
+
 
 .container {
     max-width: 900px; /* Lebar maksimum container */
+    width: 100%; /* Pastikan container mengambil lebar penuh yang tersedia hingga max-width */
     margin: 20px auto; /* Tengah di desktop, lebih baik di mobile */
     background-color: #161b22; /* Warna latar belakang container */
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.15); /* Bayangan dengan aksen cyan */
     border: 1px solid #2d333b;
+    box-sizing: border-box;
+    flex-grow: 1; /* Memungkinkan container untuk mengisi ruang vertikal yang tersedia */
 }
 
 h2, h3, h4 {
@@ -27,6 +75,7 @@ h2, h3, h4 {
     letter-spacing: 1px;
 }
 
+/* --- Input Group Styles --- */
 .input-group {
     margin-bottom: 15px;
     display: flex;
@@ -61,10 +110,11 @@ p {
     margin-bottom: 10px;
 }
 
-/* Untuk Current Capital */
+/* --- Profit Information Section --- */
 #currentCapital {
     color: #28a745; /* Warna hijau */
     font-weight: bold;
+    font-size: 1.6em;
     text-align: center; /* Pusatkan teks */
     margin-top: 20px;
 }
@@ -88,7 +138,7 @@ p {
     margin-top: 5px;
 }
 
-/* Gaya Umum untuk semua tombol */
+/* --- Button Styles --- */
 button {
     background-color: #6a0dad; /* Ungu gelap */
     color: white;
@@ -101,6 +151,7 @@ button {
     width: 100%; /* Lebar penuh secara default */
     margin-top: 15px; /* Jarak antar tombol */
     box-sizing: border-box;
+    display: block; /* Pastikan tombol mengambil baris penuh */
 }
 
 button:hover {
@@ -109,22 +160,26 @@ button:hover {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(163, 65, 240, 0.4);
 }
 
-/* Kustomisasi untuk tombol "Add Trade" dan "Rekap" di desktop */
-/* Saya mengasumsikan div ini memiliki struktur seperti di dashboard.html */
-/* style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;" */
-div[style*="display: flex"][style*="justify-content: space-between"] > button {
-    width: auto; /* Otomatis, tidak 100% */
+/* Group for "Save Trading" and "Lihat Kalender" buttons */
+.action-buttons-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 15px; /* Jarak antar tombol */
+    flex-wrap: wrap; /* Izinkan wrap di layar kecil */
+}
+
+.action-buttons-group button {
+    width: auto; /* Override 100% width */
+    flex-grow: 1; /* Biarkan tombol mengisi ruang secara merata */
     padding: 10px 20px; /* Ukuran sedang */
     font-size: 0.95em; /* Ukuran font sedang */
     margin-top: 0; /* Hapus margin atas dari gaya button umum */
-    margin-right: 10px; /* Jarak antar tombol */
+    margin-right: 0; /* Hapus margin kanan jika ada */
 }
 
-div[style*="display: flex"][style*="justify-content: space-between"] > button:last-child {
-    margin-right: 0; /* Hapus margin kanan untuk tombol terakhir */
-}
-
-
+/* --- Table Styles --- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -160,7 +215,6 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     font-weight: bold;
 }
 
-
 /* Input di dalam tabel */
 .trade-coin-input {
     width: calc(100% - 10px); /* Sesuaikan lebar */
@@ -178,6 +232,7 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     font-size: 0.8em; /* Ukuran font lebih kecil */
     margin: 3px;
     width: auto; /* Jangan 100% lebar */
+    display: inline-block; /* Izinkan berdampingan */
 }
 
 .win-btn {
@@ -196,7 +251,7 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     background-color: #c82333;
 }
 
-
+/* --- Pagination Controls --- */
 #pagination-controls {
     display: flex;
     justify-content: center;
@@ -206,7 +261,7 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
 }
 
 #pagination-controls button {
-    width: auto; /* Override 100% width from general button style */
+    width: auto; /* Override 100% width dari gaya button umum */
     padding: 8px 15px;
     margin: 5px; /* Sesuaikan margin untuk tampilan lebih baik saat wrap */
     background-color: #2d333b; /* Warna tombol pagination default */
@@ -222,8 +277,103 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     background-color: #3f4752;
 }
 
+/* --- Notes Section --- */
+.notes-section {
+    margin-top: 40px;
+    border-top: 1px solid #2d333b;
+    padding-top: 20px;
+}
 
-/* Toolbar untuk TradingView (tersembunyi secara default) */
+.notes-section ul {
+    list-style: none; /* Hapus bullet point default */
+    padding: 0;
+    margin: 0;
+}
+
+.notes-section li {
+    margin-bottom: 8px;
+    color: #8b949e; /* Abu-abu lebih terang untuk catatan */
+}
+
+.notes-section li strong {
+    color: #e0e6ed; /* Putih untuk teks tebal di catatan */
+}
+
+/* --- TradingView Chart Styles --- */
+#tvChart {
+    margin-top: 30px;
+    border: 1px solid #2d333b;
+    border-radius: 8px;
+    overflow: hidden; /* Penting untuk grafik */
+    height: 500px; /* Mengatur tinggi tetap */
+    width: 100%; /* Mengatur lebar 100% dari kontainer induk */
+    max-width: 100%; /* Pastikan tidak melebihi lebar container yang sebenarnya */
+    box-sizing: border-box; /* Pastikan padding/border termasuk dalam lebar/tinggi */
+    min-width: 0; /* Penting untuk flexbox agar tidak menyusut di bawah konten */
+}
+
+/* Styles for #tvChart when in fullscreen mode - DIHAPUS KARENA MENGANDALKAN FULLSCREEN BAWAAN TRADINGVIEW */
+/*
+#tvChart:-webkit-full-screen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    z-index: 9999 !important;
+}
+
+#tvChart:-moz-full-screen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    z-index: 9999 !important;
+}
+
+#tvChart:-ms-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    z-index: 9999 !important;
+}
+
+#tvChart:fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    z-index: 9999 !important;
+}
+*/
+
+/* Container for the fullscreen chart button - DIHAPUS KARENA TOMBOL KUSTOM DIHAPUS */
+.chart-controls {
+    display: none; /* Sembunyikan sepenuhnya kontainer tombol kustom */
+    /* margin-top: 15px; */
+    /* text-align: center; */
+}
+
+.chart-controls button {
+    /* width: auto; */
+    /* display: inline-block; */
+    /* padding: 10px 20px; */
+    /* margin-top: 0; */
+}
+
+/* --- Toolbar for TradingView (hidden by default) --- */
 .toolbar {
     background-color: #1a1e26;
     border: 1px solid #2d333b;
@@ -257,45 +407,26 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(0, 255, 255, 0.4);
 }
 
-#tvChart {
-    margin-top: 30px;
-    border: 1px solid #2d333b;
-    border-radius: 8px;
-    overflow: hidden; /* Penting untuk grafik */
-}
-
-/* Modal Styles */
+/* --- Modal Styles - General for all modals --- */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top */
+    display: none; /* Tersembunyi secara default */
+    position: fixed; /* Tetap di tempat */
+    z-index: 1000; /* Di atas, lebih tinggi dari elemen lain */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    width: 100%; /* Lebar penuh */
+    height: 100%; /* Tinggi penuh */
+    overflow: auto; /* Aktifkan scroll jika diperlukan */
+    background-color: rgba(0,0,0,0.8); /* Hitam dengan opasitas */
+    display: flex; /* Gunakan flexbox untuk pemusatan */
     justify-content: center;
     align-items: center;
-    padding-top: 20px; /* Kurangi padding untuk mobile */
+    padding: 20px; /* Tambahkan padding untuk mencegah konten menyentuh tepi */
+    box-sizing: border-box;
 }
 
 .modal.hidden {
     display: none;
-}
-
-.modal-content {
-    background-color: #161b22; /* Darker charcoal */
-    margin: 10% auto; /* Kurangi margin vertikal */
-    padding: 20px; /* Kurangi padding */
-    border: 1px solid #2d333b;
-    border-radius: 10px;
-    width: 90%; /* Lebih lebar di mobile */
-    max-width: 700px;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); /* Subtle cyan glow */
-    position: relative;
-    color: #e0e6ed;
-    box-sizing: border-box; /* Penting untuk padding */
 }
 
 .close-button {
@@ -307,62 +438,64 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     right: 20px;
     cursor: pointer;
     transition: color 0.3s ease;
+    z-index: 1001; /* Pastikan tombol tutup selalu di atas */
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: #00e6e6; /* Cyan on hover */
+    color: #00e6e6; /* Cyan saat hover */
     text-decoration: none;
 }
 
-.modal-content h3 {
-    color: #00e6e6; /* Cyan for modal heading */
+/* --- Styles for Recap Modal Content (#recapModal) --- */
+.modal-content {
+    background-color: #161b22; /* Abu-abu gelap */
+    padding: 30px;
+    border: 1px solid #2d333b;
+    border-radius: 10px;
+    width: 95%; /* Mengambil 95% lebar modal */
+    height: 95%; /* Mengambil 95% tinggi modal */
+    max-width: 95vw; /* Maksimum 95% dari lebar viewport */
+    max-height: 95vh; /* Maksimum 95% dari tinggi viewport */
+    overflow-y: auto; /* Aktifkan scrolling jika kontennya panjang */
     text-align: center;
-    margin-bottom: 15px; /* Kurangi margin */
+    color: #e0e6ed;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); /* Cahaya cyan halus */
+    position: relative;
+    box-sizing: border-box; /* Penting untuk padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Konten dimulai dari atas */
+    align-items: center;
+}
+
+.modal-content h3 {
+    color: #00e6e6; /* Cyan untuk judul modal */
+    text-align: center;
+    margin-bottom: 25px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    font-size: 1.2em; /* Lebih kecil di mobile */
+    font-size: 1.5em; /* Ukuran font untuk judul modal */
 }
 
 .recap-filters {
     display: flex;
-    flex-direction: column; /* Ubah menjadi kolom */
-    gap: 10px;
+    flex-direction: row; /* Baris untuk tombol */
+    gap: 15px; /* Jarak antar tombol */
     margin-bottom: 20px;
-    align-items: stretch; /* Regangkan item */
     justify-content: center;
-}
-
-.recap-filters label {
-    color: #8b949e;
-    font-size: 0.9em;
-    text-align: center; /* Pusatkan label */
-}
-
-.recap-filters input[type="date"] {
-    padding: 10px 15px;
-    border: 1px solid #30363d;
-    border-radius: 4px;
-    background-color: #0d1117;
-    color: #e0e6ed;
-    font-size: 0.9em;
-    outline: none;
-    width: 100%; /* Lebar penuh */
-    box-sizing: border-box;
-}
-
-.recap-filters input[type="date"]:focus {
-    border-color: #00e6e6;
-    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.3);
+    align-items: center;
+    width: 100%; /* Pastikan mengambil lebar penuh di dalam modal-content */
+    max-width: 400px; /* Batasi lebar filter agar tidak terlalu lebar di layar besar */
 }
 
 .recap-filters button {
-    padding: 10px 15px; /* Kurangi padding */
-    font-size: 0.9em;
-    margin-top: 5px; /* Jarak antar tombol filter */
-    background-color: #a341f0; /* Purple accent */
-    width: 100%; /* Lebar penuh */
-    box-sizing: border-box;
+    padding: 12px 15px; /* Padding yang lebih baik */
+    font-size: 1em; /* Ukuran font yang lebih baik */
+    margin-top: 0; /* Hapus margin-top tambahan */
+    background-color: #a341f0; /* Aksen ungu */
+    width: auto; /* Lebar otomatis untuk tombol di baris ini */
+    flex-grow: 1; /* Biarkan tombol mengisi ruang secara merata */
 }
 
 .recap-filters button:hover {
@@ -371,46 +504,194 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(163, 65, 240, 0.4);
 }
 
+#recapResults {
+    width: 100%; /* Pastikan rekap mengambil lebar penuh */
+    margin-top: 20px; /* Jarak dari filter/tombol */
+}
+
 #recapResults h4 {
     color: #00e6e6;
-    margin-top: 20px; /* Kurangi margin */
+    margin-top: 20px;
     margin-bottom: 10px;
     border-bottom: 1px solid #2d333b;
     padding-bottom: 5px;
-    font-size: 1em; /* Lebih kecil */
+    font-size: 1.1em; /* Ukuran yang lebih baik */
+    text-align: center;
 }
 
 #recapResults div {
     background-color: #1f242b;
-    padding: 10px 15px; /* Kurangi padding */
+    padding: 15px 20px; /* Padding yang lebih baik */
     border-radius: 6px;
     border: 1px solid #2d333b;
     margin-bottom: 10px;
-    font-size: 0.9em; /* Lebih kecil */
-    line-height: 1.5;
+    font-size: 0.95em; /* Ukuran yang lebih baik */
+    line-height: 1.6;
+    text-align: left; /* Teks rekap rata kiri */
 }
 
 #recapResults div span {
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
+/* --- Styles for New Calendar Modal Content (#calendarOnlyModal) --- */
+.modal-content-calendar {
+    background-color: #161b22; /* Abu-abu gelap */
+    padding: 30px;
+    border: 1px solid #2d333b;
+    border-radius: 10px;
+    width: 95%; /* Mengambil 95% lebar modal */
+    height: 95%; /* Mengambil 95% tinggi modal */
+    max-width: 95vw; /* Maksimum 95% dari lebar viewport */
+    max-height: 95vh; /* Maksimum 95% dari tinggi viewport */
+    overflow-y: auto; /* Aktifkan scrolling jika kontennya panjang */
+    text-align: center;
+    color: #e0e6ed;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); /* Cahaya cyan halus */
+    position: relative;
+    box-sizing: border-box; /* Penting untuk padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Konten dimulai dari atas */
+    align-items: center;
+}
 
-/* Media Queries untuk Layar Kecil (Mobile) */
+.modal-content-calendar h3 {
+    color: #00e6e6; /* Cyan untuk judul modal */
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+.modal-content-calendar #datepickerContainerOnly {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Biarkan datepicker mengambil lebar penuh kontainernya */
+}
+
+.calendar-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Izinkan wrap */
+}
+
+.calendar-action-buttons button {
+    width: auto; /* Override 100% width */
+    padding: 10px 15px;
+    font-size: 0.9em;
+    margin-top: 0; /* Hapus margin atas tambahan */
+    flex-grow: 1; /* Biarkan tombol tumbuh */
+    max-width: 48%; /* Batasi lebar maksimum untuk dua tombol per baris */
+}
+
+/* --- Styling untuk Vanilla JS Datepicker --- */
+.datepicker {
+    background-color: #1a1e26; /* Background kalender */
+    border: 1px solid #2d333b;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: #e0e6ed; /* Teks default */
+    font-size: 1em;
+    padding: 10px;
+}
+
+.datepicker-header {
+    background-color: #21262d; /* Header kalender */
+    color: #00e6e6; /* Teks header */
+    border-bottom: 1px solid #2d333b;
+    padding: 10px 0;
+}
+
+.datepicker-title {
+    color: #e0e6ed;
+}
+
+.datepicker-controls .button {
+    color: #00e6e6;
+    font-size: 1.2em;
+    transition: color 0.2s ease;
+}
+
+.datepicker-controls .button:hover {
+    color: #00cccc;
+}
+
+.datepicker-grid {
+    padding: 10px 0;
+}
+
+.datepicker-grid .datepicker-cell {
+    color: #e0e6ed;
+    border-radius: 4px; /* Sudut bulat untuk sel tanggal */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.datepicker-grid .datepicker-cell.today {
+    background-color: #6a0dad; /* Tanggal hari ini */
+    color: white;
+    font-weight: bold;
+}
+
+.datepicker-grid .datepicker-cell.today:hover {
+    background-color: #a341f0;
+}
+
+.datepicker-grid .datepicker-cell.selected {
+    background-color: #00e6e6; /* Tanggal terpilih */
+    color: #0d1117;
+    font-weight: bold;
+}
+
+.datepicker-grid .datepicker-cell.selected:hover {
+    background-color: #00cccc;
+}
+
+.datepicker-grid .datepicker-cell.disabled {
+    color: #8b949e; /* Tanggal non-aktif */
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Tombol Today dan Clear di Datepicker */
+.datepicker-footer .button {
+    background-color: #6a0dad;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.datepicker-footer .button:hover {
+    background-color: #a341f0;
+}
+
+/* --- Media Queries untuk Layar Kecil (Mobile) --- */
 @media (max-width: 768px) {
+    body {
+        padding: 10px; /* Kurangi padding keseluruhan di layar yang lebih kecil */
+    }
+
     .container {
-        margin: 10px; /* Margin lebih kecil di mobile */
-        padding: 15px; /* Padding lebih kecil */
+        margin: 10px;
+        padding: 15px;
         border-radius: 8px;
     }
 
     h2, h3, h4 {
-        font-size: 1.5em; /* Ukuran judul lebih kecil */
+        font-size: 1.5em;
         margin-bottom: 15px;
     }
 
     .input-group {
-        flex-direction: column; /* Tetap kolom */
+        flex-direction: column;
         gap: 5px;
     }
 
@@ -419,84 +700,78 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
         font-size: 0.9em;
     }
 
-    /* Tombol utama (Generate Trading Plan) */
+    /* Tombol utama (Generate Trading Plan, Add Trade) */
     button {
         padding: 10px 15px;
         font-size: 0.9em;
         margin-top: 10px;
     }
 
-    /* Kustomisasi untuk tombol "Add Trade" dan "Rekap" di mobile */
-    /* Mengasumsikan div ini memiliki struktur seperti di dashboard.html */
-    /* style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;" */
-    div[style*="display: flex"][style*="justify-content: space-between"] {
-        flex-direction: row; /* Tetap baris */
-        justify-content: space-around; /* Agar tombol memiliki jarak yang sama */
-        margin-top: 20px; /* Sesuaikan margin atas */
+    /* Action buttons group (Save Trading, Lihat Kalender) */
+    .action-buttons-group {
+        flex-direction: column; /* Tumpuk tombol secara vertikal di mobile */
+        gap: 10px;
+        margin-top: 20px;
     }
 
-    div[style*="display: flex"][style*="justify-content: space-between"] > button {
-        width: auto; /* Otomatis */
-        flex-grow: 1; /* Biarkan mereka tumbuh untuk mengisi ruang, tapi tidak terlalu besar */
-        max-width: 48%; /* Agar tidak 100% dan tetap bisa berdampingan */
-        padding: 10px 15px; /* Ukuran sedang */
-        font-size: 0.9em; /* Ukuran font sedang */
-        margin: 5px; /* Margin sedang antar tombol */
+    .action-buttons-group button {
+        width: 100%; /* Lebar penuh untuk tombol-tombol ini di mobile */
+        max-width: none; /* Hapus batasan lebar maksimum */
+        padding: 10px 15px;
+        font-size: 0.9em;
+        margin: 0; /* Hapus margin spesifik */
     }
 
-
-    /* Tabel responsif */
+    /* Responsive table */
     table {
-        display: block; /* Membuat tabel sebagai blok */
+        display: block;
         width: 100%;
-        overflow-x: auto; /* Memungkinkan scroll horizontal jika konten terlalu lebar */
-        white-space: nowrap; /* Mencegah teks melilit di sel */
+        overflow-x: auto; /* Aktifkan scrolling horizontal untuk tabel */
+        white-space: nowrap; /* Cegah teks membungkus di dalam sel */
     }
 
     table thead, table tbody, table tr {
-        display: block; /* Memaksa setiap baris dan header menjadi blok */
+        display: block;
     }
 
     table th, table td {
-        display: inline-block; /* Membuat sel sebaris */
-        width: auto; /* Lebar otomatis */
-        min-width: 80px; /* Lebar minimum untuk setiap kolom */
-        box-sizing: border-box; /* Termasuk padding dalam lebar */
-        border-bottom: none; /* Hapus border antar baris yang sekarang sebaris */
+        display: inline-block;
+        width: auto;
+        min-width: 80px; /* Lebar minimum untuk sel tabel */
+        box-sizing: border-box;
+        border-bottom: none;
         vertical-align: top;
-        text-align: left; /* Teks rata kiri */
+        text-align: left;
     }
 
     table thead {
-        border-bottom: 1px solid #2d333b; /* Batas bawah header */
+        border-bottom: 1px solid #2d333b;
     }
 
     table th:first-child,
     table td:first-child {
-        min-width: 40px; /* Kolom No lebih kecil */
+        min-width: 40px;
     }
 
     table th:nth-child(2),
     table td:nth-child(2) {
-        min-width: 100px; /* Kolom Trade/Koin */
+        min-width: 100px;
     }
 
     table td:last-child {
-        min-width: 120px; /* Kolom Result lebih lebar untuk tombol */
+        min-width: 120px;
     }
 
-    /* Atur tampilan tombol win/lose di dalam sel Result */
     table td .win-btn,
     table td .lose-btn {
-        display: inline-block; /* Agar tombol berdampingan */
+        display: inline-block;
         margin: 2px;
         padding: 5px 8px;
         font-size: 0.75em;
     }
 
-    /* Sesuaikan input di dalam tabel agar tidak terlalu lebar */
     .trade-coin-input {
-        width: calc(100% - 12px); /* Lebih sempit di mobile */
+        width: calc(100% - 12px);
     }
 
     .toolbar button {
@@ -504,9 +779,18 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
         font-size: 0.85em;
     }
 
+    /* Modal Content untuk Rekap */
     .modal-content {
-        padding: 15px; /* Padding modal lebih kecil */
-        margin: 5% auto; /* Margin modal lebih kecil */
+        padding: 15px;
+        width: 95%;
+        height: 95%;
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+
+    .modal-content h3 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
     }
 
     .recap-filters {
@@ -515,12 +799,39 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     }
 
     .recap-filters button {
-        margin-top: 0; /* Hapus margin-top tambahan */
+        margin-top: 0;
+        width: 100%; /* Lebar penuh untuk tombol filter modal */
     }
 
     #recapResults div {
         padding: 10px;
         font-size: 0.85em;
+    }
+
+    /* Modal Content untuk Kalender Baru */
+    .modal-content-calendar {
+        padding: 15px;
+        width: 95%;
+        height: 95%;
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+
+    .modal-content-calendar h3 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+
+    .calendar-action-buttons {
+        flex-direction: column; /* Tumpuk tombol aksi kalender */
+        gap: 10px;
+    }
+
+    .calendar-action-buttons button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        width: 100%; /* Lebar penuh untuk tombol aksi kalender */
+        max-width: none;
     }
 }
 
@@ -534,14 +845,14 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
         font-size: 1.3em;
     }
 
-    /* Kustomisasi untuk tombol "Add Trade" dan "Rekap" di mobile kecil */
-    div[style*="display: flex"][style*="justify-content: space-between"] > button {
-        padding: 8px 12px; /* Lebih kecil lagi */
+    /* Action buttons group (Save Trading, Lihat Kalender) */
+    .action-buttons-group button {
+        padding: 8px 12px;
         font-size: 0.8em;
     }
 
     table th, table td {
-        min-width: 60px; /* Bahkan lebih kecil untuk kolom */
+        min-width: 60px;
         font-size: 0.8em;
         padding: 8px 5px;
     }
@@ -562,8 +873,15 @@ table tbody td:nth-child(5)  /* Reward (Profit) */
     .modal-content {
         padding: 10px;
     }
-
     .recap-filters button {
+        font-size: 0.8em;
+    }
+
+    .modal-content-calendar {
+        padding: 10px;
+    }
+
+    .calendar-action-buttons button {
         font-size: 0.8em;
     }
 }
