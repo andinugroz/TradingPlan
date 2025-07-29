@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Calls - Trading Journal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Gaya spesifik untuk informationcalls.html */
+        .info-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .info-content {
+            background-color: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .info-content h3 {
+            color: #66ccff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .info-content p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .info-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #ccc;
+        }
+
+        .info-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .long-calls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* Adjusted min-width for more content */
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .long-call-card {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .long-call-card h4 {
+            color: #99ff66;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            /* Center the coin name */
+        }
+
+        .long-call-card .overview {
+            font-size: 0.95em;
+            color: #eee;
+            margin-bottom: 15px;
+            background-color: #3a3a3a;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .timeframe-details {
+            margin-top: 10px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+
+        .timeframe-details p {
+            margin-bottom: 3px;
+            font-size: 0.85em;
+            color: #bbb;
+        }
+
+        .timeframe-details .timeframe-label {
+            font-weight: bold;
+            color: #ffcc66;
+            /* Yellow for timeframe labels */
+            margin-right: 5px;
+        }
+
+        .timeframe-details .reason-text {
+            color: #ccc;
+        }
+
+        .entry-exit-info {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px dashed #555;
+        }
+
+        .entry-exit-info p {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        .entry-exit-info .label {
+            font-weight: bold;
+            color: #66ccff;
+        }
+
+        .entry-exit-info .value {
+            color: #eee;
+        }
+
+        .long-call-card button {
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .long-call-card button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-button-container button {
+            padding: 10px 25px;
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button-container button:hover {
+            background-color: #4a148c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="info-header">
+            <h2>Informasi & Panggilan Trading (Information Calls)</h2>
+            <p>Di sini Anda bisa menemukan berbagai informasi penting dan potensi panggilan trading.</p>
+        </div>
+
+        <div class="info-content">
+            <h3>Pembaruan Umum</h3>
+            <p>Bagian ini akan berisi pembaruan reguler terkait kondisi pasar, analisis makro, atau berita penting yang
+                relevan dengan trading Anda.</p>
+            <ul>
+                <li>Analisis Pasar Harian/Mingguan</li>
+                <li>Pengumuman Ekonomi Penting</li>
+                <li>Tips & Trik Trading</li>
+            </ul>
+        </div>
+
+        <div class="info-content">
+            <h3>📈 Potensi Panggilan Long Calls</h3>
+            <p>Berikut adalah beberapa aset kripto yang memiliki potensi untuk posisi long berdasarkan analisis
+                multi-timeframe. Selalu lakukan riset Anda sendiri (DYOR) dan gunakan manajemen risiko yang tepat.</p>
+
+            <div class="long-calls-grid" id="longCallsContainer">
+            </div>
+        </div>
+
+        <div class="back-button-container">
+            <button onclick="window.location.href = 'dashboard.html';">Kembali ke Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        // Data dummy potensi long calls dengan analisis per timeframe
+        // Anda bisa mengganti ini dengan data aktual hasil analisis Anda sendiri
+        const potentialLongCalls = [
+            {
+                id: 1,
+                coin: "BTCUSDT",
+                overview: "Potensi bullish jangka menengah, konsolidasi dekat support kuat.",
+                timeframes: [
+                    { tf: "15 Menit", reason: "Reversal dari oversold, volume beli awal terlihat." },
+                    { tf: "4 Jam", reason: "Terbentuknya higher low, EMA 20 mendekati bullish crossover." },
+                    { tf: "1 Hari", reason: "Memantul dari support mayor, divergensi bullish pada RSI." },
+                    { tf: "1 Minggu", reason: "Tren naik masih utuh, harga bertahan di atas EMA 50." }
+                ],
+                entry: "65,000 - 65,500 USDT",
+                tp: "67,000 - 68,500 USDT",
+                sl: "64,800 USDT",
+                chartLink: "https://www.tradingview.com/chart/?symbol=BINANCE%3ABTCUSDT"
+            },
+            {
+                id: 2,
+                coin: "ETHUSDT",
+                overview: "Sinyal pembalikan tren jangka pendek dan menengah, sentimen positif.",
+                timeframes: [
+                    { tf: "15 Menit", reason: "Breakout dari resistance kecil, retest berhasil." },
+                    { tf: "4 Jam", reason: "Bullish engulfing candle, MACD golden cross." },
+                    { tf: "1 Hari", reason: "Double bottom formation, konfirmasi di neckline." },
+                    { tf: "1 Minggu", reason: "Berada di area support historis, potensi akumulasi." }
+                ],
+                entry: "3,400 - 3,450 USDT",
+                tp: "3,600 - 3,700 USDT",
+                sl: "3,380 USDT",
+                chartLink: "https://www.tradingview.com/chart/?symbol=BINANCE%3AETHUSDT"
+            },
+            {
+                id: 3,
+                coin: "SOLUSDT",
+                overview: "Momentum kuat di timeframe kecil, konfirmasi tren di timeframe besar.",
+                timeframes: [
+                    { tf: "15 Menit", reason: "Harga menembus dan bertahan di atas MA utama, volume tinggi." },
+                    { tf: "4 Jam", reason: "Penguatan tren setelah konsolidasi, target resistance berikutnya." },
+                    { tf: "1 Hari", reason: "Uptrend sehat, koreksi wajar di area support dinamis." },
+                    { tf: "1 Minggu", reason: "Struktur pasar bullish, potensi kelanjutan tren." }
+                ],
+                entry: "180 - 182 USDT",
+                tp: "185 - 190 USDT",
+                sl: "179 USDT",
+                chartLink: "https://www.tradingview.com/chart/?symbol=BINANCE%3ASOLUSDT"
+            },
+            {
+                id: 4,
+                coin: "BNBUSDT",
+                overview: "Konsolidasi positif, fundamental ekosistem kuat mendukung kenaikan.",
+                timeframes: [
+                    { tf: "15 Menit", reason: "Pergerakan sideway di atas support minor." },
+                    { tf: "4 Jam", reason: "Pembentukan base di sekitar EMA 50, tekanan jual berkurang." },
+                    { tf: "1 Hari", reason: "Konsolidasi di atas level support kunci, RSI menunjukkan potensi bullish." },
+                    { tf: "1 Minggu", reason: "Tren naik jangka panjang masih valid, harga membentuk pola bullish." }
+                ],
+                entry: "580 - 585 USDT",
+                tp: "600 - 615 USDT",
+                sl: "578 USDT",
+                chartLink: "https://www.tradingview.com/chart/?symbol=BINANCE%3ABNBUSDT"
+            },
+            {
+                id: 5,
+                coin: "XRPUSDT",
+                overview: "Berada di area akumulasi, potensi pembalikan tren jangka panjang.",
+                timeframes: [
+                    { tf: "15 Menit", reason: "Ada volume spike saat harga menyentuh support." },
+                    { tf: "4 Jam", reason: "Mulai membentuk higher low setelah koreksi." },
+                    { tf: "1 Hari", reason: "Testing ulang support historis, potensi reversal kuat." },
+                    { tf: "1 Minggu", reason: "Terlihat pola reversal di timeframe mingguan, potensi perubahan tren." }
+                ],
+                entry: "0.50 - 0.51 USDT",
+                tp: "0.55 - 0.58 USDT",
+                sl: "0.49 USDT",
+                chartLink: "https://www.tradingview.com/chart/?symbol=BINANCE%3AXRPUSDT"
+            }
+        ];
+
+        // Fungsi untuk menampilkan data potensi long calls
+        function displayLongCalls() {
+            const container = document.getElementById('longCallsContainer');
+            container.innerHTML = ''; // Bersihkan konten sebelumnya
+
+            potentialLongCalls.forEach(call => {
+                const card = document.createElement('div');
+                card.classList.add('long-call-card');
+
+                let timeframeHtml = '';
+                call.timeframes.forEach(tfDetail => {
+                    timeframeHtml += `<p><span class="timeframe-label">${tfDetail.tf}:</span> <span class="reason-text">${tfDetail.reason}</span></p>`;
+                });
+
+                card.innerHTML = `
+                    <h4>${call.coin}</h4>
+                    <p class="overview">${call.overview}</p>
+                    <div class="timeframe-details">
+                        <h5>Analisis Timeframe:</h5>
+                        ${timeframeHtml}
+                    </div>
+                    <div class="entry-exit-info">
+                        <p><span class="label">Entry Zone:</span> <span class="value">${call.entry}</span></p>
+                        <p><span class="label">Target (TP):</span> <span class="value">${call.tp}</span></p>
+                        <p><span class="label">Stop Loss (SL):</span> <span class="value">${call.sl}</span></p>
+                    </div>
+                    <button onclick="window.open('${call.chartLink}', '_blank');">Lihat Grafik</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', displayLongCalls);
+    </script>
+</body>
+
+</html>

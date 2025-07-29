@@ -72,9 +72,12 @@
 
         <div id="tvChart"></div>
 
-        <!-- New class for the fullscreen button container -->
         <div class="chart-controls">
             <button id="fullscreenChartBtn" onclick="toggleFullScreenChart()">Layar Penuh Grafik</button>
+        </div>
+
+        <div class="input-group">
+            <button onclick="window.location.href = 'informationcalls.html';">Information Calls</button>
         </div>
 
         <div class="toolbar hidden" id="toolbar">
@@ -116,7 +119,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
     <script src="script.js"></script>
 
-    <!-- Script tambahan fullscreen -->
     <script>
         function toggleFullScreenChart() {
             const chart = document.getElementById('tvChart');
